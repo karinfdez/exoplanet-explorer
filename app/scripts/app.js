@@ -35,6 +35,7 @@ Instructions:
 
     Your code goes here!
      */
+    return fetch(url);  //No need to specify the 'get', if not defined, it assumes is a get request
   }
 
   /**
@@ -48,6 +49,8 @@ Instructions:
 
     Your code goes here!
      */
+    return get(url).then(function(result){
+      return result.json()}); //same as json.pars
   }
 
   window.addEventListener('WebComponentsReady', function() {
@@ -58,6 +61,13 @@ Instructions:
 
     Your code goes here too!
      */
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json')
+    .then(function(result){
+      addSearchHeader(result.query);
+    })
+    .catch(function(error){
+      addSearchHeader('unknown');
+      console.log(error);
+    })
   });
 })(document);
